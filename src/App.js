@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
+
 // components imports
 import Home from './components/Home';
 import NavBar from './components/NavBar';
 import Beers from './components/Beers';
 import NewBeer from './components/NewBeer';
 import RandomBeer from './components/RandomBeer';
+import SingleBeer from './components/SingleBeer';
 
 import './App.css';
 
@@ -37,6 +39,13 @@ class App extends React.Component {
             exact
             path="/beers"
             render={() => <Beers beers={this.state.beers} />}
+          />
+          <Route
+            exact
+            path="/beers/:beerId"
+            render={(props) => (
+              <SingleBeer {...props} beers={this.state.beers} />
+            )}
           />
           <Route exact path="/new-beer" component={NewBeer} />
           <Route exact path="/random-beer" component={RandomBeer} />

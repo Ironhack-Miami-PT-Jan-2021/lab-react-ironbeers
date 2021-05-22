@@ -30,7 +30,14 @@ class App extends React.Component {
       });
   }
 
+  handleBeersUpdate = (beers) => {
+    this.setState({
+      beers,
+    });
+  };
+
   render() {
+    console.log(window);
     return (
       <div className="App">
         <NavBar />
@@ -38,7 +45,13 @@ class App extends React.Component {
           <Route
             exact
             path="/beers"
-            render={() => <Beers beers={this.state.beers} />}
+            render={(props) => (
+              <Beers
+                {...props}
+                beers={this.state.beers}
+                handleBeersUpdate={this.handleBeersUpdate}
+              />
+            )}
           />
           <Route
             exact
@@ -50,6 +63,7 @@ class App extends React.Component {
           <Route exact path="/new-beer" component={NewBeer} />
           <Route exact path="/random-beer" component={RandomBeer} />
           <Route exact path="/" component={Home} />
+          <Route path="/" render={() => <div>404 Error</div>} />
         </Switch>
       </div>
     );

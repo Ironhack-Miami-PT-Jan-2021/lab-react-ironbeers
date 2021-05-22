@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Beers.css';
 
 export default class Beers extends Component {
+  handleChange = (e) => {
+    const query = e.target.value;
+    axios
+      .get(`https://ih-beers-api2.herokuapp.com/beers/search?q=${query}`)
+      .then((responseFromAPI) => {
+        this.props.handleBeersUpdate(responseFromAPI.data);
+      });
+  };
+
   render() {
     const beersToRender = this.props.beers.map((beerData) => (
       <div key={beerData.name} className="beer-container">
@@ -16,6 +26,11 @@ export default class Beers extends Component {
         </div>
       </div>
     ));
-    return beersToRender;
+    return (
+      <>
+        <input type="text" placeholder="search" onChange={this.handleChange} />
+        {beersToRender}
+      </>
+    );
   }
 }

@@ -21,6 +21,8 @@ export default class SingleBeer extends Component {
     // const theBeer = beers.find((beer) => beer._id === beerId);
     // console.log(theBeer);
     // if (!theBeer) return null;
+    console.log(this.props);
+
     return (
       <div key={this.state.theBeer.name} className="beer-container">
         <img src={this.state.theBeer.image_url} alt="a beer" height="200px" />
